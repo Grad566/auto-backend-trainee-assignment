@@ -1,5 +1,6 @@
 import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;
+import model.ShortUrl;
 import model.Url;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import repository.ShortUrlRepository;
 import repository.UrlRepository;
 
 
@@ -45,6 +47,19 @@ class AppTest {
             var response = client.get("/");
             assertThat(response.code()).isEqualTo(200);
             assertThat(response.body().string().contains("Генератор ссылок"));
+        });
+    }
+
+    @Test
+    public void testAddCustomUrl() {
+        JavalinTest.test(app, (server, client) -> {
+            var requestBody = "url=https://github.com&readablePart=jack";
+            var response = client.post("/", requestBody);
+            assertThat(response.code()).isEqualTo(200);
+
+            var url = ShortUrlRepository.findById(1L).orElse(new ShortUrl(1L, ""));
+            var name = url.getName();
+            assertThat(name).contains("http://localhost:7070/jack");
         });
     }
 
