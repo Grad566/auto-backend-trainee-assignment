@@ -35,7 +35,7 @@ public class UrlController {
     }
 
     public static void createShortUrl(Context ctx) throws SQLException {
-        var link = ctx.formParam("name");
+        var link = ctx.formParam("url");
         try {
             var uri = new URI(link);
             var uriToUrl = uri.toURL();
@@ -49,7 +49,7 @@ public class UrlController {
 
             ctx.sessionAttribute("flash", "Ссылка успешна создана");
             ctx.sessionAttribute("id", shortUrl.getId());
-        } catch (URISyntaxException | MalformedURLException e) {
+        } catch (URISyntaxException | MalformedURLException | IllegalArgumentException e) {
             ctx.sessionAttribute("flash", "Некорректный адрес");
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
@@ -68,6 +68,7 @@ public class UrlController {
             var url = UrlRepository.findById(originUrlId)
                     .orElseThrow(() -> new NotFoundResponse("Ссылка не действительная"));
             ctx.redirect(url.getName());
+
         } catch (SQLException | NotFoundResponse e) {
             ctx.result("Ссылка не действительная");
         }
@@ -77,6 +78,8 @@ public class UrlController {
     private static String generateShortLink(Url link)  {
         var host = System.getenv()
                 .getOrDefault("SERVER_HOST", "localhost:7070");
-        return "https://" + host + "/" + link.getId();
+        var protocol = System.getenv()
+                .getOrDefault("PROTOCOL", "http");
+        return protocol + "://" + host + "/" + link.getId();
     }
 }

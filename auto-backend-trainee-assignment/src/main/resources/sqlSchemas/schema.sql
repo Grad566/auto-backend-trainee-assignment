@@ -15,4 +15,3 @@ CREATE TABLE short_urls (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX index_short_name ON short_urls (name);

@@ -26,7 +26,7 @@ public class ShortUrlRepository extends BaseRepository {
     }
 
     public static Optional<ShortUrl> findByName(String name) throws SQLException {
-        var sql = "SELECT * FROM urls WHERE name = ?";
+        var sql = "SELECT * FROM short_urls WHERE name = ?";
         try (var conn = dataSource.getConnection();
                 var stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
@@ -45,7 +45,7 @@ public class ShortUrlRepository extends BaseRepository {
     }
 
     public static Optional<ShortUrl> findById(Long id) throws SQLException {
-        var sql = "SELECT * FROM urls WHERE id = ?";
+        var sql = "SELECT * FROM short_urls WHERE id = ?";
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);

@@ -18,13 +18,12 @@ import java.sql.SQLException;
 
 public class App {
     public static void main(String[] args) {
-        Javalin app = null;
         try {
-            app = getApp();
+            var app = getApp();
+            app.start(getPort());
         } catch (IOException | URISyntaxException | SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
-        app.start(getPort());
     }
 
     public static Javalin getApp() throws IOException, URISyntaxException, SQLException {
