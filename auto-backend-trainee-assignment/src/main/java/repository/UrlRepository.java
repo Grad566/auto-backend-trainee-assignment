@@ -1,6 +1,5 @@
 package repository;
 
-import model.ShortUrl;
 import model.Url;
 import util.Utils;
 
@@ -8,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
 
-public class UrlRepository extends BaseRepository{
+public class UrlRepository extends BaseRepository {
     public static void save(Url url) throws SQLException {
         var sql = "INSERT INTO urls (name) VALUES (?)";
         try (var conn = dataSource.getConnection();

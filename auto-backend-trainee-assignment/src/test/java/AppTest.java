@@ -26,12 +26,12 @@ class AppTest {
 
     @BeforeAll
     public static void beforeAll() throws IOException {
-            server = new MockWebServer();
-            var serverResponse = new MockResponse()
-                    .addHeader("Content-Type", "application/json; charset=utf-8")
-                    .setResponseCode(200);
-            server.enqueue(serverResponse);
-            server.start();
+        server = new MockWebServer();
+        var serverResponse = new MockResponse()
+                .addHeader("Content-Type", "application/json; charset=utf-8")
+                .setResponseCode(200);
+        server.enqueue(serverResponse);
+        server.start();
     }
 
     @AfterAll
@@ -55,7 +55,7 @@ class AppTest {
             var response = client.post("/", requestBody);
             assertThat(response.code()).isEqualTo(200);
 
-            var url = UrlRepository.findById(1l).orElse(new Url(""));
+            var url = UrlRepository.findById(1L).orElse(new Url(""));
             var name = url.getName();
             assertThat(name).contains("https://github.com");
         });
@@ -68,7 +68,7 @@ class AppTest {
             var response = client.post("/", requestBody);
             assertThat(response.code()).isEqualTo(200);
 
-            var url = UrlRepository.findById(1l);
+            var url = UrlRepository.findById(1L);
             assertThat(url).isEmpty();
         });
     }
