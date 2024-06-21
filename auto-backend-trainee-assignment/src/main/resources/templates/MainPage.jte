@@ -38,6 +38,11 @@
                 <input name="url" type="text" class="form-control form-control-lg" placeholder="Ссылка">
             </div>
             <div class="form-text">Пример: https://www.example.com</div>
+            <label class="form-label">Кастомизировать ссылку (необязательно)</label>
+            <div class="col-auto">
+                <input name="readablePart" type="text" class="form-control form-control-lg" placeholder="Читаемая часть">
+            </div>
+            <div class="form-text">Пример: avito-auto-be</div>
             <div class="col-auto">
                 <button class="btn btn-primary col-auto" type="submit">Сгенерировать</button>
             </div>

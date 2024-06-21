@@ -36,13 +36,14 @@ public class UrlController {
 
     public static void createShortUrl(Context ctx) throws SQLException {
         var link = ctx.formParam("url");
+        var readablePart = ctx.formParam("readablePart");
         try {
             var uri = new URI(link);
             var uriToUrl = uri.toURL();
             var originUrl = new Url(uriToUrl.toString());
             UrlRepository.save(originUrl);
 
-            var shortLink = generateShortLink(originUrl);
+            var shortLink = generateShortLink(originUrl, readablePart);
             var shortUrl = new ShortUrl(originUrl.getId(), shortLink);
             ShortUrlRepository.save(shortUrl);
             ctx.result(shortUrl.getName());
@@ -52,7 +53,7 @@ public class UrlController {
         } catch (URISyntaxException | MalformedURLException | IllegalArgumentException e) {
             ctx.sessionAttribute("flash", "Некорректный адрес");
         } catch (SQLException e) {
-            throw new SQLException(e.getMessage());
+            ctx.sessionAttribute("flash", "Эта комбинация уже занята, кастомизируйте ссылку по другому");
         } finally {
             ctx.redirect(RefPaths.rootPath());
         }
@@ -75,11 +76,12 @@ public class UrlController {
     }
 
 
-    private static String generateShortLink(Url link)  {
+    private static String generateShortLink(Url link, String readablePart)  {
         var host = System.getenv()
                 .getOrDefault("SERVER_HOST", "localhost:7070");
         var protocol = System.getenv()
                 .getOrDefault("PROTOCOL", "http");
-        return protocol + "://" + host + "/" + link.getId();
+        var uri = readablePart == null ? link.getId() : readablePart;
+        return protocol + "://" + host + "/" + uri;
     }
 }
