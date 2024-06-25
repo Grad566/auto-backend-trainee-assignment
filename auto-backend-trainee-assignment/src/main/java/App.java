@@ -51,6 +51,10 @@ public class App {
 
         BaseRepository.dataSource = dataSource;
 
+        app.before(ctx -> {
+            ctx.contentType("application/json; charset=utf=8");
+        });
+
         app.get(RefPaths.rootPath(), UrlController::showMainPage);
         app.post(RefPaths.rootPath(), UrlController::createShortUrl);
         app.get(RefPaths.generatedLinkPath(), UrlController::makeRedirect);
