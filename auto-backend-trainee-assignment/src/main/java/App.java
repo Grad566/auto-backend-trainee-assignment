@@ -8,13 +8,15 @@ import io.javalin.rendering.template.JavalinJte;
 import gg.jte.TemplateEngine;
 import repository.BaseRepository;
 import util.RefPaths;
-import java.nio.file.Paths;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.sql.SQLException;
+import java.util.stream.Collectors;
 
 public class App {
     public static void main(String[] args) {
@@ -69,8 +71,10 @@ public class App {
     }
 
     private static String readSourceFile(String fileName) throws IOException, URISyntaxException {
-        return Files.readString(Paths.get(App.class
-                    .getClassLoader().getResource(fileName).toURI()), StandardCharsets.UTF_8);
+        var inputStream = App.class.getClassLoader().getResourceAsStream(fileName);
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            return reader.lines().collect(Collectors.joining("\n"));
+        }
     }
 
     private static int getPort() {
