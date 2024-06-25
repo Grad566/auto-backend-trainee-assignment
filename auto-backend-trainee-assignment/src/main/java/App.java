@@ -6,6 +6,7 @@ import gg.jte.resolve.ResourceCodeResolver;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 import gg.jte.TemplateEngine;
+import lombok.extern.slf4j.Slf4j;
 import repository.BaseRepository;
 import util.RefPaths;
 
@@ -18,6 +19,8 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.stream.Collectors;
 
+
+@Slf4j
 public class App {
     public static void main(String[] args) {
         try {
@@ -47,10 +50,6 @@ public class App {
         }
 
         BaseRepository.dataSource = dataSource;
-
-        app.before(ctx -> {
-            ctx.contentType("application/json; charset=utf=8");
-        });
 
         app.get(RefPaths.rootPath(), UrlController::showMainPage);
         app.post(RefPaths.rootPath(), UrlController::createShortUrl);
