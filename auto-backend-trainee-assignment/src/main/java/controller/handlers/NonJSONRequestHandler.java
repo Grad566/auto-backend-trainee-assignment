@@ -65,7 +65,8 @@ public final class NonJSONRequestHandler implements RequestHandler {
 
     @Override
     public void makeRedirect(Context ctx) {
-        var name = ctx.fullUrl();
+        var protocol = System.getenv().getOrDefault("PROTOCOL", "http");
+        var name = ctx.fullUrl().replace("http", protocol);
         try {
             var shortUrl = ShortUrlRepository.findByName(name)
                     .orElseThrow(NotFoundResponse::new);
