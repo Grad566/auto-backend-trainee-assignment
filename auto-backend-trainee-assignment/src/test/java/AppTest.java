@@ -1,5 +1,7 @@
+import controller.handlers.JSONRequestHandler;
 import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;
+import lombok.SneakyThrows;
 import model.ShortUrl;
 import model.Url;
 import okhttp3.mockwebserver.MockResponse;
@@ -10,16 +12,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repository.ShortUrlRepository;
 import repository.UrlRepository;
+import io.javalin.http.Context;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+
 class AppTest {
     Javalin app;
     private static MockWebServer server;
+    private final Context ctx = mock(Context.class);
 
     @BeforeEach
     public final void setApp() throws SQLException, IOException, URISyntaxException {
@@ -46,7 +53,7 @@ class AppTest {
         JavalinTest.test(app, (server, client) -> {
             var response = client.get("/");
             assertThat(response.code()).isEqualTo(200);
-            assertThat(response.body().string().contains("Генератор ссылок"));
+            assertThat(response.body().string()).contains("Генератор ссылок");
         });
     }
 
@@ -97,5 +104,20 @@ class AppTest {
             var response = client.get("/1");
             assertThat(response.code()).isEqualTo(200);
         });
+    }
+
+    @Test
+    @SneakyThrows
+    public void testCreateShortUrlFromJSON() {
+        String json = "{\"url\":\"https://example.com\",\"readablePart\":\"jack\"}";
+        when(ctx.body()).thenReturn(json);
+
+        JSONRequestHandler handler = new JSONRequestHandler();
+        handler.createShortUrl(ctx);
+
+        var shortUrl = ShortUrlRepository.findById(1L)
+                .orElse(new ShortUrl(2L, ""));
+
+        assertThat(shortUrl.getName()).contains("http://localhost:7070/jack");
     }
 }
