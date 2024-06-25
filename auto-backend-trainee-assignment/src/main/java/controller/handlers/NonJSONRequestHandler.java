@@ -75,7 +75,7 @@ public final class NonJSONRequestHandler implements RequestHandler {
             ctx.redirect(url.getName());
 
         } catch (NotFoundResponse e) {
-            ctx.result("Ссылка не действительная");
+            ctx.result(name);
         } catch (SQLException e) {
             ctx.result("Проблема с бд!");
         }
