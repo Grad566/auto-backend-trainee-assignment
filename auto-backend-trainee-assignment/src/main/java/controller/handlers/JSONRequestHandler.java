@@ -68,7 +68,7 @@ public final class JSONRequestHandler implements RequestHandler {
 
         } catch (SQLException | NotFoundResponse e) {
             var response = new HashMap<String, String>();
-            response.put("error", "Тут появился json");
+            response.put("error", "ссылка не действительна");
             ctx.json(response);
             ctx.status(400);
         }
