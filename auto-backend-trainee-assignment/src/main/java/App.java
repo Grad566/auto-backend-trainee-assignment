@@ -73,7 +73,7 @@ public class App {
                     .getOrDefault("getDataBaseUrl", "jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;");
     }
 
-    private static String readSourceFile(String fileName) throws IOException, URISyntaxException {
+    private static String readSourceFile(String fileName) throws IOException {
         var inputStream = App.class.getClassLoader().getResourceAsStream(fileName);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             return reader.lines().collect(Collectors.joining("\n"));
