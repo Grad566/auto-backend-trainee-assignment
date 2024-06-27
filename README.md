@@ -13,6 +13,7 @@
 Развернутое приложение: https://short-link-lbgq.onrender.com
 
 Помимо работы через web-версию, приложение может также работать как JSON API сервис.
+
 Пример запроса:
 ```
 curl -X POST https://short-link-lbgq.onrender.com/ -H "Content-Type: application/json" -d '{ "url":"https://www.example.com", "readablePart":"jack" }'
@@ -34,6 +35,7 @@ docker-compose up
 После чего приложение будет доступно по http://localhost:7070/
 
 2) Запуск без докера.
+
 Требования:
  - jdk 21
  - gradle 8.7
@@ -43,4 +45,5 @@ make dev
 ```
 
 После чего приложение будет доступно по http://localhost:7070/
+
 В качестве бд будет H2.
