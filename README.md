@@ -52,5 +52,11 @@ make dev
 ```
 // запуск checkStyle
 make lint 
+
+// запуск тестов
+make test 
+
+// сборка приложения
+make build 
 ```
 
