@@ -6,7 +6,7 @@
 
 Требования - [здесь](https://github.com/avito-tech/auto-backend-trainee-assignment?tab=readme-ov-file)
 
-Приложение представляет собой сократитель ссылок.
+Приложение представляет собой HTTP сервис для сокращения URL наподобие Bitly.
 
 ## Использования
 
