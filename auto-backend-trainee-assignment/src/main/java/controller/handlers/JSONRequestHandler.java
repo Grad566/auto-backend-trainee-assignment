@@ -42,6 +42,7 @@ public final class JSONRequestHandler implements RequestHandler {
             var shortUrl = new ShortUrl(originUrl.getId(), shortLink);
             ShortUrlRepository.save(shortUrl);
 
+            response.put("originUrl", link);
             response.put("shortUrl", shortUrl.getName());
             response.put("message", "Ссылка успешно создана");
             ctx.json(response);
@@ -65,6 +66,7 @@ public final class JSONRequestHandler implements RequestHandler {
             var url = UrlRepository.findById(originUrlId)
                     .orElseThrow(NotFoundResponse::new);
             ctx.redirect(url.getName());
+            ctx.status(301);
 
         } catch (SQLException | NotFoundResponse e) {
             var response = new HashMap<String, String>();
