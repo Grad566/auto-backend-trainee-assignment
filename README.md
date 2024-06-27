@@ -2,11 +2,11 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/e86c4429a58955cda69a/maintainability)](https://codeclimate.com/github/Grad566/auto-backend-trainee-assignment/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e86c4429a58955cda69a/test_coverage)](https://codeclimate.com/github/Grad566/auto-backend-trainee-assignment/test_coverage)
 
-Тестовое задание от Авито
+## Тестовое задание от Авито
 
 Требования - [здесь](https://github.com/avito-tech/auto-backend-trainee-assignment?tab=readme-ov-file)
 
-Приорежение представляет собой сократитель ссылок.
+Приложение представляет собой сократитель ссылок.
 
 ## Использования
 
@@ -26,4 +26,21 @@ curl -X POST https://short-link-lbgq.onrender.com/ -H "Content-Type: application
 
 ## Локальный запуск
 
+1) Если есть Docker и docker-compose.
 
+```
+docker-compose up
+```
+После чего приложение будет доступно по http://localhost:7070/
+
+2) Запуск без докера.
+Требования:
+ - jdk 21
+ - gradle 8.7
+
+```
+make dev
+```
+
+После чего приложение будет доступно по http://localhost:7070/
+В качестве бд будет H2.
