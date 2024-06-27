@@ -6,6 +6,6 @@ COPY /auto-backend-trainee-assignment .
 
 RUN gradle installDist
 
-CMD ["./build/install/auto-backend-trainee-assignment/bin/auto-backend-trainee-assignment", "--host=0.0.0.0", "--port=8080" ]
+CMD ["./build/install/auto-backend-trainee-assignment/bin/auto-backend-trainee-assignment", "--host=0.0.0.0", "--port=7070" ]
 
-EXPOSE 8080
+EXPOSE 7070
