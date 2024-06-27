@@ -3,9 +3,12 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e86c4429a58955cda69a/test_coverage)](https://codeclimate.com/github/Grad566/auto-backend-trainee-assignment/test_coverage)
 
 Тестовое задание от Авито
+
 Требования - [здесь](https://github.com/avito-tech/auto-backend-trainee-assignment?tab=readme-ov-file)
 
-##Использования
+Приорежение представляет собой сократитель ссылок.
+
+## Использования
 
 Развернутое приложение: https://short-link-lbgq.onrender.com
 
@@ -21,6 +24,6 @@ curl -X POST https://short-link-lbgq.onrender.com/ -H "Content-Type: application
 
 Ключ readablePart можно не указывать, если ссылку не нужно кастомизировать.
 
-##Локальный запуск
+## Локальный запуск
 
 
