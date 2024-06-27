@@ -5,8 +5,10 @@
 Тестовое задание от Авито
 Требования - [здесь](https://github.com/avito-tech/auto-backend-trainee-assignment?tab=readme-ov-file)
 
-##Использования.##
+##Использования
+
 Развернутое приложение: https://short-link-lbgq.onrender.com
+
 Помимо работы через web-версию, приложение может также работать как JSON API сервис.
 Пример запроса:
 ```
@@ -19,6 +21,6 @@ curl -X POST https://short-link-lbgq.onrender.com/ -H "Content-Type: application
 
 Ключ readablePart можно не указывать, если ссылку не нужно кастомизировать.
 
-##Локальный запуск.##
+##Локальный запуск
 
 
