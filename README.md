@@ -50,7 +50,7 @@ make dev
 
 Дополнительные команды:
 ```
-/запуск checkStyle
+// запуск checkStyle
 make lint 
 ```
 
